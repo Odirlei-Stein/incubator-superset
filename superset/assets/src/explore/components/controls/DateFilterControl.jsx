@@ -58,6 +58,9 @@ const RELATIVE_TIME_OPTIONS = Object.freeze({
 });
 const COMMON_TIME_FRAMES = [
   'Last day',
+  'This week',
+  'This month',
+  'This year',
   'Last week',
   'Last month',
   'Last quarter',
@@ -99,10 +102,10 @@ const propTypes = {
 
 const defaultProps = {
   animation: true,
-  onChange: () => {},
+  onChange: () => { },
   value: 'Last week',
-  onOpenDateFilterControl: () => {},
-  onCloseDateFilterControl: () => {},
+  onOpenDateFilterControl: () => { },
+  onCloseDateFilterControl: () => { },
 };
 
 function isValidMoment(s) {
@@ -119,18 +122,34 @@ function getStateFromSeparator(value) {
 }
 
 function getStateFromCommonTimeFrame(value) {
+
   const units = value.split(' ')[1] + 's';
-  return {
+  let since = moment()
+    .utc()
+  let until = moment().utc().startOf('day')
+  if (value.indexOf("This") !== -1) {
+    since = since
+      .startOf(units)
+    until = until.endOf(units)
+    // until = until.endOf(units)
+  } else {
+    since = since.startOf('day')
+    since = since
+      .subtract(1, units)
+
+  }
+
+
+  const r = {
     tab: TABS.DEFAULTS,
     type: TYPES.DEFAULTS,
     common: value,
-    since: moment()
-      .utc()
-      .startOf('day')
-      .subtract(1, units)
+    since: since
       .format(MOMENT_FORMAT),
-    until: moment().utc().startOf('day').format(MOMENT_FORMAT),
+    until: until.format(MOMENT_FORMAT),
   };
+  console.log({ value, r })
+  return r
 }
 
 function getStateFromCustomRange(value) {
@@ -336,7 +355,7 @@ export default class DateFilterControl extends React.Component {
             type="text"
             onKeyPress={this.onEnter}
             onFocus={this.setTypeCustomStartEnd}
-            onClick={() => {}}
+            onClick={() => { }}
           />
           <InputGroup.Button onClick={() => this.toggleCalendar(key)}>
             <Button>
@@ -357,7 +376,7 @@ export default class DateFilterControl extends React.Component {
       >
         {grain}
       </MenuItem>
-      ));
+    ));
     const timeFrames = COMMON_TIME_FRAMES.map((timeFrame) => {
       const nextState = getStateFromCommonTimeFrame(timeFrame);
       const endpoints = this.props.endpoints;
@@ -377,7 +396,7 @@ export default class DateFilterControl extends React.Component {
               checked={this.state.common === timeFrame}
               onChange={() => this.setState(nextState)}
             >
-              {timeFrame}
+              {t(timeFrame)}
             </Radio>
           </div>
         </OverlayTrigger>
@@ -531,7 +550,7 @@ export default class DateFilterControl extends React.Component {
           overlay={this.renderPopover()}
           onClick={this.handleClickTrigger}
         >
-          <Label name="popover-trigger" style={{ cursor: 'pointer' }}>{value}</Label>
+          <Label name="popover-trigger" style={{ cursor: 'pointer' }}>{t(value)}</Label>
         </OverlayTrigger>
       </div>
     );

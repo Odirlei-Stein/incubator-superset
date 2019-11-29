@@ -2627,6 +2627,30 @@
          ],
          "Saved Queries": [
             "Perguntas frequentes"
+         ],
+         "Last day": [
+            "Hoje"
+         ],
+         "Last week": [
+            "Últimos 7 dias"
+         ],
+         "Last month": [
+            "Ultimo 1 Mês"
+         ],
+         "Last year": [
+            "Último Ano"
+         ],
+         "This year": [
+            "Este Ano"
+         ],
+         "This month": [
+            "Este Mês"
+         ],
+         "This week": [
+            "Esta semana"
+         ],
+         "No filter": [
+            "Sem filtro"
          ]
       }
    }

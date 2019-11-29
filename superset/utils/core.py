@@ -34,9 +34,10 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.utils import formatdate
 from enum import Enum
-from time import struct_time
+from time import struct_time,sleep
 from typing import Any, Dict, Iterator, List, NamedTuple, Optional, Tuple, Union
 from urllib.parse import unquote_plus
+from pandas.tseries import offsets
 
 import bleach
 import celery
@@ -1024,6 +1025,7 @@ def get_since_until(
         - Next X seconds/minutes/hours/days/weeks/months/years
 
     """
+    
     separator = " : "
     relative_start = parse_human_datetime(relative_start if relative_start else "today")
     relative_end = parse_human_datetime(relative_end if relative_end else "today")
@@ -1048,6 +1050,21 @@ def get_since_until(
             relative_start - relativedelta(years=1),  # type: ignore
             relative_end,
         ),
+       
+        "This year": (
+            date.today() - offsets.YearBegin(),  # type: ignore
+            date.today() + offsets.YearEnd(),
+        ),
+        
+        "This month": (
+              relative_start - relativedelta(days=relative_start.day -  1) ,  # type: ignore
+            relative_end,
+        ),
+        "This week": (
+            relative_start - relativedelta(days=relative_start.weekday()),  # type: ignore
+            relative_end,
+        ),
+        
     }
 
     if time_range:
