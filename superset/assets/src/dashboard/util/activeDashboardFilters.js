@@ -120,7 +120,7 @@ export function buildActiveFilters({ dashboardFilters = {}, components = {} }) {
         // remove filter itself
         const scope = getChartIdsInFilterScope({
           filterScope: scopes[column],
-        }).filter(id => chartId !== id);
+        }).filter(id => chartId !== id || column === "__time_range");
 
         nonEmptyFilters[getDashboardFilterKey({ chartId, column })] = {
           values: columns[column],
