@@ -178,11 +178,15 @@ class ChartHolder extends React.Component {
     } = this.props;
 
     // inherit the size of parent columns
-    const widthMultiple =
+    let widthMultiple =
       parentComponent.type === COLUMN_TYPE
         ? parentComponent.meta.width || GRID_MIN_COLUMN_COUNT
         : component.meta.width || GRID_MIN_COLUMN_COUNT;
 
+    //Apply responsive width to grids
+    if (widthMultiple < 12 && columnWidth < 62.75) {
+      widthMultiple = 12
+    }
     return (
       <DragDroppable
         component={component}
@@ -215,7 +219,7 @@ class ChartHolder extends React.Component {
               ref={dragSourceRef}
               className={`dashboard-component dashboard-component-chart-holder ${
                 this.state.outlinedComponentId ? 'fade-in' : 'fade-out'
-              }`}
+                }`}
             >
               {!editMode && (
                 <AnchorLink
@@ -230,8 +234,8 @@ class ChartHolder extends React.Component {
                 id={component.meta.chartId}
                 width={Math.floor(
                   widthMultiple * columnWidth +
-                    (widthMultiple - 1) * GRID_GUTTER_SIZE -
-                    CHART_MARGIN,
+                  (widthMultiple - 1) * GRID_GUTTER_SIZE -
+                  CHART_MARGIN,
                 )}
                 height={Math.floor(
                   component.meta.height * GRID_BASE_UNIT - CHART_MARGIN,
