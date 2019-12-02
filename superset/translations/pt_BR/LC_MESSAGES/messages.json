@@ -2638,7 +2638,10 @@
             "Ultimo 1 Mês"
          ],
          "Last year": [
-            "Último Ano"
+            "Último 1 Ano"
+         ],
+         "Last quarter": [
+            "Último Trimestre"
          ],
          "This year": [
             "Este Ano"
@@ -2651,6 +2654,9 @@
          ],
          "No filter": [
             "Sem filtro"
+         ],
+         "New": [
+            "Novo"
          ]
       }
    }

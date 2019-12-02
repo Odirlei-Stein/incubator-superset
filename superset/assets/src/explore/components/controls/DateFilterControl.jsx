@@ -148,7 +148,6 @@ function getStateFromCommonTimeFrame(value) {
       .format(MOMENT_FORMAT),
     until: until.format(MOMENT_FORMAT),
   };
-  console.log({ value, r })
   return r
 }
 

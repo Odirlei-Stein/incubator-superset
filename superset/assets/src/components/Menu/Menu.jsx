@@ -33,6 +33,7 @@ const propTypes = {
       path: PropTypes.string.isRequired,
       icon: PropTypes.string.isRequired,
       alt: PropTypes.string.isRequired,
+      width: PropTypes.number.isRequired,
     }).isRequired,
     navbar_right: PropTypes.shape({
       bug_report_url: PropTypes.string,
@@ -55,7 +56,7 @@ export default function Menu({ data: { menu, brand, navbar_right: navbarRight } 
         <Navbar.Header>
           <Navbar.Brand>
             <a className="navbar-brand" href={brand.path}>
-              <img width="126" src={brand.icon} alt={brand.alt} />
+              <img width={brand.width} src={brand.icon} alt={brand.alt} />
             </a>
           </Navbar.Brand>
           <Navbar.Toggle />

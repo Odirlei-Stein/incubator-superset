@@ -1,14 +1,95 @@
-.pivot_table{
-    td{
+.pivot_table {
+    > div {
+        max-height: 650px;
+        height: auto !important;
+    }
+    td {
         text-align: right;
     }
+    th {
+        vertical-align: middle !important;
+    }
 }
-
 
 .bar{
     overflow-x: auto!important;
     > div {
-        overflow-x: initial!important;
+        overflow-x: initial !important;
 
+    }
+}
+
+.resizable-container{ 
+    height: auto !important;
+}
+
+.panel {
+    border: 1px solid #e0e0e0 !important;
+}
+
+.navbar-inverse {
+    background-color: #e1e8ed !important;
+    border: 3px solid #e1e8ed !important;
+    box-shadow: 0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12);
+}
+
+.nav > li > a {
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.editable-title {
+    input {
+        text-transform: uppercase;
+    }
+}
+
+.panel-title {
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.p-0 {
+    padding: 0px !important;
+}
+
+.dashboard-component-chart-holder {
+    border: 1px solid #e6e6e6;
+}
+
+.Select--multi .Select-value {
+    margin: 0 !important;
+    border: 0 !important;    
+    padding: 0 !important;
+    line-height: 25px !important;
+}
+
+.Select-control {
+    height: 31px !important;
+}
+
+.Select--multi .Select-value-icon {
+    padding: 1px 5px 0 !important;
+}
+
+@media screen and (max-width: 990px) {
+    .grid-content {
+        display: block !important;
+        flex-direction: initial !important;
+    }
+    .grid-container {
+        margin: 20px !important;
+    }
+    .grid-row {
+        display: block !important;
+    }
+    .grid-row > :not(:only-child):not(:last-child):not(.hover-menu) {
+        margin-bottom: 16px !important;
+        margin-right: 0 !important;
+    }
+    .resizable-container {
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 100% !important;
     }
 }

@@ -200,6 +200,7 @@ class BaseSupersetView(BaseView):
                 "path": root_path,
                 "icon": appbuilder.app_icon,
                 "alt": appbuilder.app_name,
+                "width": appbuilder.app.config['APP_ICON_WIDTH'],
             },
             "navbar_right": {
                 "bug_report_url": appbuilder.app.config.get("BUG_REPORT_URL"),

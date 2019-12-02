@@ -18,8 +18,8 @@
  */
 const { assign } = Object;
 
-const A11Y_BABU = '#00A699';
-const AXIS_LINE_GRAY = '#484848';
+const A11Y_BABU = '#3e4095';
+const AXIS_LINE_GRAY = '#404040';
 
 // Colors
 const colors = [
@@ -34,7 +34,7 @@ const colors = [
   '#000000',
 ];
 
-const charcoal = '#484848';
+const charcoal = '#404040';
 
 // Typography
 const sansSerif = '"Roboto", sans-serif';

@@ -76,9 +76,9 @@ const propTypes = {
 };
 const defaultProps = {
   origSelectedValues: {},
-  onChange: () => {},
-  onFilterMenuOpen: () => {},
-  onFilterMenuClose: () => {},
+  onChange: () => { },
+  onFilterMenuOpen: () => { },
+  onFilterMenuClose: () => { },
   showDateFilter: false,
   showSqlaTimeGrain: false,
   showSqlaTimeColumn: false,
@@ -161,8 +161,8 @@ class FilterBox extends React.Component {
     const label = t(FILTER_LABELS[TIME_RANGE]);
     if (showDateFilter) {
       return (
-        <div className="row space-1">
-          <div className="col-lg-12 col-xs-12 filter-container">
+        <div className="col-md-4 col-sm-4 col-lg-4 col-xs-12 m-b-10">
+          <div className="filter-container">
             {this.renderFilterBadge(chartId, TIME_RANGE, label)}
             <DateFilterControl
               name={TIME_RANGE}
@@ -293,11 +293,13 @@ class FilterBox extends React.Component {
     return filtersFields.map((filterConfig) => {
       const { label, key } = filterConfig;
       return (
-        <div key={key} className="m-b-5 filter-container">
+        <div key={key} className="col-md-4 col-sm-4 col-lg-4 col-xs-12 m-b-10">
           {this.renderFilterBadge(chartId, key, label)}
-          <div>
-            <label htmlFor={`LABEL-${key}`}>{label}</label>
-            {this.renderSelect(filterConfig)}
+          <div className={"filter-container"}>
+            <div className={"col-xs-12 p-0"}>
+              <label htmlFor={`LABEL-${key}`}>{label}</label>
+              {this.renderSelect(filterConfig)}
+            </div>
           </div>
         </div>
       );
@@ -310,10 +312,12 @@ class FilterBox extends React.Component {
     const colorCode = filterColorMap[colorKey];
 
     return (
-      <div className="filter-badge-container">
-        <FilterBadgeIcon
-          colorCode={colorCode}
-        />
+      <div>
+        <div className={"pull-left"}>
+          <FilterBadgeIcon
+            colorCode={colorCode}
+          />
+        </div>
       </div>
     );
   }
@@ -324,9 +328,11 @@ class FilterBox extends React.Component {
     return (
       <div className="scrollbar-container">
         <div className="scrollbar-content">
-          {this.renderDateFilter()}
-          {this.renderDatasourceFilters()}
-          {this.renderFilters()}
+          <div className={"row"}>
+            {this.renderDateFilter()}
+            {this.renderDatasourceFilters()}
+            {this.renderFilters()}
+          </div>
           {!instantFiltering &&
             <Button
               bsSize="small"
