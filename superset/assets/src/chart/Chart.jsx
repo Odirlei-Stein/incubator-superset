@@ -167,7 +167,7 @@ class Chart extends React.PureComponent {
           style={containerStyles}
         >
 
-          {isLoading && <Loading position={"custom"} size={50} />}
+          {isLoading && <Loading size={50} />}
 
           {!isLoading && !chartAlert && isFaded && (
             <RefreshChartOverlay

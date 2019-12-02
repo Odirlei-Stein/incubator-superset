@@ -89,3 +89,4 @@ apache-superset-*.tar.gz*
 messages.mo
 local_app/nohup.out
 local_app/run.sh
+local_app/environment
