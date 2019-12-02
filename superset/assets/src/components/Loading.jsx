@@ -23,7 +23,7 @@ import './Loading.less';
 
 const propTypes = {
   size: PropTypes.number,
-  position: PropTypes.oneOf(['floating', 'normal']),
+  position: PropTypes.oneOf(['floating', 'normal', 'custom']),
   className: PropTypes.string,
 };
 const defaultProps = {
@@ -41,8 +41,18 @@ const FLOATING_STYLE = {
   transform: 'translate(-50%, -50%)',
 };
 
+
+const FLOATING_CUSTOM_STYLE = {
+  padding: 0,
+  margin: 0,
+  position: 'absolute',
+  left: '50%',
+  top: '50%',
+  transform: 'translate(-50%, -50%)',
+};
+
 export default function Loading({ size, position, className }) {
-  const style = position === 'floating' ? FLOATING_STYLE : {};
+  const style = position === 'custom' ? FLOATING_CUSTOM_STYLE : (position === 'floating' ? FLOATING_STYLE : {});
   const styleWithWidth = {
     ...style,
     size,

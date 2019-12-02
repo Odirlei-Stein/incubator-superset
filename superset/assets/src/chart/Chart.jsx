@@ -69,7 +69,7 @@ const defaultProps = {
   onFilterMenuOpen: () => BLANK,
   onFilterMenuClose: () => BLANK,
   initialValues: BLANK,
-  setControlValue() {},
+  setControlValue() { },
   triggerRender: false,
 };
 
@@ -145,12 +145,13 @@ class Chart extends React.PureComponent {
       errorMessage,
       onQuery,
       refreshOverlayVisible,
+      queryResponse
     } = this.props;
 
     const isLoading = chartStatus === 'loading';
 
     // this allows <Loading /> to be positioned in the middle of the chart
-    const containerStyles = isLoading ? { height, width } : null;
+    const containerStyles = isLoading && !queryResponse ? { height, width } : null;
     const isFaded = refreshOverlayVisible && !errorMessage;
     this.renderContainerStartTime = Logger.getTimestamp();
     if (chartStatus === 'failed') {
@@ -166,7 +167,7 @@ class Chart extends React.PureComponent {
           style={containerStyles}
         >
 
-          {isLoading && <Loading size={50} />}
+          {isLoading && <Loading position={"custom"} size={50} />}
 
           {!isLoading && !chartAlert && isFaded && (
             <RefreshChartOverlay
