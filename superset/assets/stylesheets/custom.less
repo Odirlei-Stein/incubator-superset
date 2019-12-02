@@ -1,6 +1,6 @@
 .pivot_table {
     > div {
-        max-height: 650px;
+        max-height: 600px;
         height: auto !important;
     }
     td {
@@ -11,11 +11,32 @@
     }
 }
 
+.table {
+    > thead {
+        > tr {
+            font-size: 12px;
+            > th {
+                text-transform: uppercase;
+                > a {
+                    color: #404040;
+                }
+            }
+        }
+    }
+    > tbody {
+        > tr {
+            font-size: 12px;
+            > td {
+                vertical-align: middle;
+            }
+        }
+    }
+} 
+
 .bar{
     overflow-x: auto!important;
     > div {
         overflow-x: initial !important;
-
     }
 }
 
@@ -30,7 +51,9 @@
 .navbar-inverse {
     background-color: #e1e8ed !important;
     border: 3px solid #e1e8ed !important;
-    box-shadow: 0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12);
+    box-shadow: 0px 2px 4px -1px rgba(0,0,0,0.2), 
+    0px 4px 5px 0px rgba(0,0,0,0.14), 
+    0px 1px 10px 0px rgba(0,0,0,0.12);
 }
 
 .nav > li > a {
@@ -50,7 +73,7 @@
 }
 
 .p-0 {
-    padding: 0px !important;
+    padding: 0 !important;
 }
 
 .dashboard-component-chart-holder {
@@ -58,18 +81,33 @@
 }
 
 .Select--multi .Select-value {
-    margin: 0 !important;
-    border: 0 !important;    
+    border: 0 !important;
     padding: 0 !important;
-    line-height: 25px !important;
+    line-height: 21px !important;
 }
 
 .Select-control {
     height: 31px !important;
 }
 
+.grid-container {
+    margin: 24px !important;
+}
+
 .Select--multi .Select-value-icon {
     padding: 1px 5px 0 !important;
+}
+
+.panel-body h3,  .panel-body h4, .panel-body p {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.ControlHeader {
+    .label {
+        color: #404040;
+    }
 }
 
 @media screen and (max-width: 990px) {
@@ -84,12 +122,7 @@
         display: block !important;
     }
     .grid-row > :not(:only-child):not(:last-child):not(.hover-menu) {
-        margin-bottom: 16px !important;
         margin-right: 0 !important;
-    }
-    .resizable-container {
-        width: 100% !important;
-        max-width: 100% !important;
-        min-width: 100% !important;
+        margin-bottom: 16px !important;
     }
 }

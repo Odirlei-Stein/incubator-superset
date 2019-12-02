@@ -161,7 +161,7 @@ class FilterBox extends React.Component {
     const label = t(FILTER_LABELS[TIME_RANGE]);
     if (showDateFilter) {
       return (
-        <div className="col-md-4 col-sm-4 col-lg-4 col-xs-12 m-b-10">
+        <div className="col-xs-12 col-lg-4 col-md-4 col-sm-4 m-b-10">
           <div className="filter-container">
             {this.renderFilterBadge(chartId, TIME_RANGE, label)}
             <DateFilterControl
@@ -293,7 +293,7 @@ class FilterBox extends React.Component {
     return filtersFields.map((filterConfig) => {
       const { label, key } = filterConfig;
       return (
-        <div key={key} className="col-md-4 col-sm-4 col-lg-4 col-xs-12 m-b-10">
+        <div key={key} className="col-xs-12 col-lg-4 col-md-4 col-sm-4 m-b-10">
           {this.renderFilterBadge(chartId, key, label)}
           <div className={"filter-container"}>
             <div className={"col-xs-12 p-0"}>

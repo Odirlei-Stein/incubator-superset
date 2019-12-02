@@ -36,17 +36,17 @@ const UserInfo = ({ user }) => (
         size={220}
         alt={t('Profile picture provided by Gravatar')}
         className="img-rounded"
-        style={{ borderRadius: 15 }}
+        style={{ borderRadius: '50%' }}
       />
     </a>
     <hr />
     <Panel>
-      <h3>
+      <h4>
         <strong>{user.firstName} {user.lastName}</strong>
-      </h3>
-      <h4 className="username">
-        <i className="fa fa-user-o" /> {user.username}
       </h4>
+      <p className="username">
+        <i className="fa fa-user-o" /> {user.username}
+      </p>
       <hr />
       <p>
         <i className="fa fa-clock-o" /> {t('joined')} {moment(user.createdOn, 'YYYYMMDD').fromNow()}
