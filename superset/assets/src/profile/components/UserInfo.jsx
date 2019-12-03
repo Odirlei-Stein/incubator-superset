@@ -49,7 +49,8 @@ const UserInfo = ({ user }) => (
       </p>
       <hr />
       <p>
-        <i className="fa fa-clock-o" /> {t('joined')} {moment(user.createdOn, 'YYYYMMDD').fromNow()}
+        <i className="fa fa-clock-o" /> {t('joined')}{' '}
+        {moment(user.createdOn, 'YYYYMMDD').fromNow()}
       </p>
       <p className="email">
         <i className="fa fa-envelope-o" /> {user.email}
@@ -58,7 +59,8 @@ const UserInfo = ({ user }) => (
         <i className="fa fa-lock" /> {Object.keys(user.roles).join(', ')}
       </p>
       <p>
-        <i className="fa fa-key" />&nbsp;
+        <i className="fa fa-key" />
+        &nbsp;
         <span className="text-muted">{t('id:')}</span>&nbsp;
         <span className="user-id">{user.userId}</span>
       </p>

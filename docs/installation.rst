@@ -220,7 +220,7 @@ setup known to work well in production: ::
         --limit-request-line 0 \
         --limit-request-field_size 0 \
         --statsd-host localhost:8125 \
-        superset:app
+        "superset.app:create_app()"
 
 Refer to the
 `Gunicorn documentation <https://docs.gunicorn.org/en/stable/design.html>`_
@@ -360,7 +360,7 @@ Here's a list of some of the recommended packages.
 |                  |                                       | For JDBC                                        |
 |                  |                                       | ``drill+jdbc://``                               |
 +------------------+---------------------------------------+-------------------------------------------------+
-| Apache Druid     | ``pip install pydruid``                | ``druid://``                                   |
+| Apache Druid     | ``pip install pydruid``               | ``druid://``                                    |
 +------------------+---------------------------------------+-------------------------------------------------+
 | Apache Hive      | ``pip install pyhive``                | ``hive://``                                     |
 +------------------+---------------------------------------+-------------------------------------------------+
