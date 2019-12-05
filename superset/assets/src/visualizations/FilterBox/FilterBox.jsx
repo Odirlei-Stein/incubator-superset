@@ -357,7 +357,7 @@ class FilterBox extends React.Component {
             >
               {t('Apply')}
             </Button>
-          )}
+          }
         </div>
       </div>
     );

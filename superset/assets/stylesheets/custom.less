@@ -1,8 +1,4 @@
 .pivot_table {
-    > div {
-        max-height: 600px;
-        height: auto !important;
-    }
     td {
         text-align: right;
     }
@@ -32,13 +28,10 @@
     }
 } 
 .bar{
-    overflow-x: auto!important;
+    overflow-x: auto !important;
     > div {
         overflow-x: initial !important;
     }
-}
-.resizable-container{ 
-    height: auto !important;
 }
 .panel {
     border: 1px solid #e0e0e0 !important;
@@ -83,10 +76,22 @@
 .Select--multi .Select-value-icon {
     padding: 1px 5px 0 !important;
 }
-.panel-body h3,  .panel-body h4, .panel-body p {
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
+.panel-body {    
+    h3 {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+    h4 {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+    p {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
 }
 .filter-container {
     .label {
@@ -110,6 +115,22 @@
         }
     }
 }
+.dashboard-header .dashboard-component-header .favstar {    
+    font-size: 15px !important;
+}
+.header-large {
+    font-size: 20px !important;
+}
+.dashboard-header .dashboard-component-header {
+    font-weight: 700 !important;
+}
+.navbar .caret {
+    top: 50%;
+    right: 5px;
+    z-index: 7;
+    margin-top: -7px;
+    position: absolute;
+}
 @media screen and (max-width: 990px) {
     .grid-content {
         display: block !important;
@@ -124,5 +145,16 @@
     .grid-row > :not(:only-child):not(:last-child):not(.hover-menu) {
         margin-right: 0 !important;
         margin-bottom: 16px !important;
+    }
+    .resizable-container {
+        width: 100% !important;
+        height: auto !important;
+        max-width: 100% !important;
+        min-width: 100% !important;
+    }
+    .pivot_table {
+        > div {
+            height: auto !important;
+        }
     }
 }

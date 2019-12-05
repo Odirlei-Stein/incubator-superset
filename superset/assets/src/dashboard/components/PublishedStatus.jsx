@@ -31,12 +31,12 @@ const propTypes = {
 
 const draftButtonTooltip = t(
   'This dashboard is not published, it will not show up in the list of dashboards. ' +
-    'Click here to publish this dashboard.',
+  'Click here to publish this dashboard.',
 );
 
 const draftDivTooltip = t(
   'This dashboard is not published which means it will not show up in the list of dashboards.' +
-    ' Favorite it to see it there or access it by using the URL directly.',
+  ' Favorite it to see it there or access it by using the URL directly.',
 );
 
 const publishedTooltip = t(
@@ -44,11 +44,11 @@ const publishedTooltip = t(
 );
 
 const divStyle = {
-  border: '1px dotted black',
-  backgroundColor: '#F9F9F9',
+  border: '1px solid #c1c1c1',
+  backgroundColor: '#e1e8ed',
   padding: '3px 7px 3px 7px',
   fontFamily: 'Monospace',
-  fontSize: '16px',
+  fontSize: '14px',
 };
 
 export default class PublishedStatus extends React.Component {
