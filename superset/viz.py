@@ -698,6 +698,7 @@ class PivotTableViz(BaseViz):
             values=[utils.get_metric_name(m) for m in self.form_data.get("metrics")],
             aggfunc=aggfunc,
             margins=self.form_data.get("pivot_margins"),
+            fill_value=0
         )
         # Display metrics side by side with each column
         if self.form_data.get("combine_metric"):
@@ -872,7 +873,7 @@ class BoxPlotViz(NVD3Viz):
     viz_type = "box_plot"
     verbose_name = _("Box Plot")
     sort_series = False
-    is_timeseries = True
+    is_timeseries = False
 
     def to_series(self, df, classed="", title_suffix=""):
         label_sep = " - "
