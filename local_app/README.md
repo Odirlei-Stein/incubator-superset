@@ -12,8 +12,8 @@ O superset precisa de algumas variaveis de ambiente para funcionar. O systemd es
 
 # Como parar ou iniciar o serviço
 O serviço inicia com o sistema, mas caso precise é só rodar
-- `sudo service stop gunicorn`
-- `sudo service start gunicorn`
+- `sudo service  gunicorn stop`
+- `sudo service  gunicorn start`
 
 # Como atualizar para a versão atual do superset
 Pegue a ultima versao do branch chamado superset

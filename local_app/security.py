@@ -7,7 +7,7 @@ from flask_login import login_user, logout_user
 import jwt
 import os
 import logging
-
+import educar_integracao 
 class CustomAuthDBView(AuthDBView):
     login_template = 'appbuilder/general/security/login_db.html'
 
@@ -62,6 +62,26 @@ class CustomAuthDBView(AuthDBView):
         else:
             # flash('Unable to auto login', 'warning')
             return super(CustomAuthDBView,self).login()
+
+    @expose('/login_educar/', methods=['GET', 'POST'])
+    def login_educar(self):
+        
+        log = logging.getLogger(__name__)
+
+        redirect_url = self.appbuilder.get_url_for_index
+        if request.args.get('redirect') is not None:
+            redirect_url = request.args.get('redirect') 
+
+        # if request.args.get("username") and request.args.get("password"):
+
+        if request.args.get('jwt') is not None:
+            jwt_token = request.args.get('jwt')
+            result = educar_integracao.login_or_create( self.appbuilder,jwt_token)
+            if not result:
+                return super(CustomAuthDBView,self).login()
+
+            return redirect(redirect_url)
+        return super(CustomAuthDBView,self).login()
 
 class CustomSecurityManager(SupersetSecurityManager):
     authdbview = CustomAuthDBView
