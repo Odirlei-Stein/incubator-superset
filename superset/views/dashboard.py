@@ -23,7 +23,7 @@ from superset import appbuilder, db
 from superset.models import core as models
 
 from .base import BaseSupersetView
-
+# from tenant import get_current_tenant_id
 
 class Dashboard(BaseSupersetView):
     """The base views for Superset!"""
@@ -35,6 +35,7 @@ class Dashboard(BaseSupersetView):
         new_dashboard = models.Dashboard(
             dashboard_title="[ untitled dashboard ]", owners=[g.user]
         )
+        new_dashboard.tenant_id = get_current_tenant_id()
         db.session.add(new_dashboard)
         db.session.commit()
         return redirect(f"/superset/dashboard/{new_dashboard.id}/?edit=true")

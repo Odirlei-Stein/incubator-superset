@@ -164,6 +164,7 @@ class Slice(Model, AuditMixinNullable, ImportMixin):
     __tablename__ = "slices"
     id = Column(Integer, primary_key=True)
     slice_name = Column(String(250))
+    tenant_id = Column(String(500))
     datasource_id = Column(Integer)
     datasource_type = Column(String(200))
     datasource_name = Column(String(2000))
@@ -428,6 +429,7 @@ class Dashboard(Model, AuditMixinNullable, ImportMixin):
     __tablename__ = "dashboards"
     id = Column(Integer, primary_key=True)
     dashboard_title = Column(String(500))
+    tenant_id = Column(String(500))
     position_json = Column(utils.MediumText())
     description = Column(Text)
     css = Column(Text)

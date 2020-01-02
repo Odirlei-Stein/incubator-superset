@@ -61,7 +61,7 @@ def DB_CONNECTION_MUTATOR(uri, params, username, security_manager, source):
         user = security_manager.find_user(username=username)
         regex = r"\_(\d+)$"
         result = re.findall(regex,security_manager.current_user.username)
-        if result:
+        if len(result) > 0:
             tenant_id = result[0]
             connection_info = educar_connection.get_connection_info(tenant_id)
             if connection_info:

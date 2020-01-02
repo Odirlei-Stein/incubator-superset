@@ -111,6 +111,8 @@ from .utils import (
     get_viz,
 )
 
+from .tenant import (get_current_tenant_id , TenantFilter,TenantDashboardFilter)
+
 config = app.config
 CACHE_DEFAULT_TIMEOUT = config["CACHE_DEFAULT_TIMEOUT"]
 SQLLAB_QUERY_COST_ESTIMATE_TIMEOUT = config["SQLLAB_QUERY_COST_ESTIMATE_TIMEOUT"]
@@ -252,6 +254,7 @@ class SliceFilter(SupersetFilter):
         return query.filter(self.model.perm.in_(perms))
 
 
+
 class DashboardFilter(SupersetFilter):
     """
     List dashboards with the following criteria:
@@ -307,6 +310,7 @@ class DashboardFilter(SupersetFilter):
             )
         )
 
+        
         return query
 
 
@@ -358,9 +362,10 @@ class SliceModelView(SupersetModelView, DeleteMixin):
         "viz_type",
         "datasource_name",
         "owners",
+        "tenant_id"
     )
-    list_columns = ["slice_link", "viz_type", "datasource_link", "creator", "modified"]
-    order_columns = ["viz_type", "datasource_link", "modified"]
+    list_columns = ["slice_link", "viz_type", "datasource_link", "creator", "modified","tenant_id"]
+    order_columns = ["viz_type", "datasource_link", "modified","tenant_id"]
     edit_columns = [
         "slice_name",
         "description",
@@ -369,6 +374,7 @@ class SliceModelView(SupersetModelView, DeleteMixin):
         "dashboards",
         "params",
         "cache_timeout",
+        "tenant_id",
     ]
     base_order = ("changed_on", "desc")
     description_columns = {
@@ -389,7 +395,7 @@ class SliceModelView(SupersetModelView, DeleteMixin):
             "Note this defaults to the datasource/table timeout if undefined."
         ),
     }
-    base_filters = [["id", SliceFilter, lambda: []]]
+    base_filters = [["id", SliceFilter, lambda: []],["tenant_id",TenantFilter,lambda:[]]]
     label_columns = {
         "cache_timeout": _("Cache Timeout"),
         "creator": _("Creator"),
@@ -405,7 +411,7 @@ class SliceModelView(SupersetModelView, DeleteMixin):
         "viz_type": _("Visualization Type"),
     }
 
-    add_form_query_rel_fields = {"dashboards": [["name", DashboardFilter, None]]}
+    add_form_query_rel_fields = {"dashboards": [["name", DashboardFilter, None],["tenant_id", TenantDashboardFilter, None]]}
 
     edit_form_query_rel_fields = add_form_query_rel_fields
 
@@ -496,7 +502,7 @@ class DashboardModelView(SupersetModelView, DeleteMixin):
     add_title = _("Add Dashboard")
     edit_title = _("Edit Dashboard")
 
-    list_columns = ["dashboard_link", "creator", "published", "modified"]
+    list_columns = ["dashboard_link", "creator", "published", "modified","tenant_id"]
     order_columns = ["modified", "published"]
     edit_columns = [
         "dashboard_title",
@@ -536,7 +542,7 @@ class DashboardModelView(SupersetModelView, DeleteMixin):
             "visible in the list of all dashboards"
         ),
     }
-    base_filters = [["slice", DashboardFilter, lambda: []]]
+    base_filters = [["slice", DashboardFilter, lambda: []],["tenant_id",TenantFilter,lambda:[]]]
     label_columns = {
         "dashboard_link": _("Dashboard"),
         "dashboard_title": _("Title"),
@@ -559,6 +565,9 @@ class DashboardModelView(SupersetModelView, DeleteMixin):
             obj.slug = re.sub(r"[^\w\-]+", "", obj.slug)
         if g.user not in obj.owners:
             obj.owners.append(g.user)
+        tenant_id = get_current_tenant_id()
+        if tenant_id:
+            obj.tenant_id = get_current_tenant_id()
         utils.validate_json(obj.json_metadata)
         utils.validate_json(obj.position_json)
         owners = [o for o in obj.owners]
@@ -567,6 +576,9 @@ class DashboardModelView(SupersetModelView, DeleteMixin):
 
     def pre_update(self, obj):
         check_ownership(obj)
+        tenant_id = get_current_tenant_id()
+        if tenant_id:
+            obj.tenant_id = get_current_tenant_id()
         self.pre_add(obj)
 
     def pre_delete(self, obj):
@@ -1359,6 +1371,7 @@ class Superset(BaseSupersetView):
         slc.datasource_type = datasource_type
         slc.datasource_id = datasource_id
         slc.slice_name = slice_name
+        slc.tenant_id = get_current_tenant_id()
 
         if action in ("saveas") and slice_add_perm:
             self.save_slice(slc)
@@ -1405,6 +1418,7 @@ class Superset(BaseSupersetView):
                 dashboard_title=request.args.get("new_dashboard_name"),
                 owners=[g.user] if g.user else [],
             )
+            dash.tenant_id = get_current_tenant_id()
             flash(
                 _(
                     "Dashboard [{}] just got created and chart [{}] was added " "to it"
