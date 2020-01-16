@@ -63,6 +63,7 @@ def DB_CONNECTION_MUTATOR(uri, params, username, security_manager, source):
         result = re.findall(regex,security_manager.current_user.username)
         if len(result) > 0:
             tenant_id = result[0]
+            connection_info = educar_connection.get_connection_info(tenant_id)
             #if tenant_id in cache_dict:
             #    connection_info = cache_dict[tenant_id]
             #else:
