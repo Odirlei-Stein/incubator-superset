@@ -45,7 +45,7 @@ def login_or_create(appbuilder,jwt_token):
     login_user(user, remember=False,force=True)
     return True
     
-
+cache_dict = {}
 def DB_CONNECTION_MUTATOR(uri, params, username, security_manager, source):
     if str(uri).endswith("educar"):
         #   self.drivername = drivername
@@ -63,7 +63,11 @@ def DB_CONNECTION_MUTATOR(uri, params, username, security_manager, source):
         result = re.findall(regex,security_manager.current_user.username)
         if len(result) > 0:
             tenant_id = result[0]
-            connection_info = educar_connection.get_connection_info(tenant_id)
+            #if tenant_id in cache_dict:
+            #    connection_info = cache_dict[tenant_id]
+            #else:
+            #    connection_info = educar_connection.get_connection_info(tenant_id)
+            #    cache_dict[tenant_id] = connection_info
             if connection_info:
                 uri.username = connection_info["user"]
                 uri.password_original = connection_info["password"]
