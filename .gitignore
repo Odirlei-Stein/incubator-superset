@@ -90,3 +90,9 @@ messages.mo
 local_app/nohup.out
 local_app/run.sh
 local_app/environment
+lib
+lib64
+share
+bin
+pyvenv.cfg
+include

@@ -45,7 +45,7 @@ class CustomAuthDBView(AuthDBView):
                     first_name=first_name,
                     last_name=last_name,
                     email=jwt_data["email"],
-                    role=self.appbuilder.sm.find_role("Agenda"),
+                    role=self.appbuilder.sm.find_role(os.environ.get("APP_JWT_ROLE_NAME")),
                     password="".join(jwt_token[0:10])
                 )
                 if not new_user:
